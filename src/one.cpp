@@ -13,9 +13,9 @@ One::one ()
     assert (this->filestream);
     while (this->filestream)
         {
-            std::string line;
-            std::getline (this->filestream, line);
-            if (line.compare ("") == 0)
+            string line;
+            getline (this->filestream, line);
+            if (line.empty ())
                 {
                     break;
                 }
@@ -46,9 +46,9 @@ One::two ()
     assert (this->filestream);
     while (this->filestream)
         {
-            std::string line;
-            std::getline (this->filestream, line);
-            if (line.compare ("") == 0)
+            string line;
+            getline (this->filestream, line);
+            if (line.empty ())
                 {
                     break;
                 }

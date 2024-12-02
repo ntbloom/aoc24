@@ -1,21 +1,31 @@
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <chrono>
 #include <filesystem>
 #include <format>
 #include <fstream>
 #include <iostream>
+#include <regex>
 #include <sstream>
 #include <string>
+#include <unordered_map>
+#include <vector>
 
-typedef std::chrono::steady_clock steadyTimer_t;
-typedef std::chrono::duration<long, std::ratio<1, 1000000000>> nanosecDuration_t;
-typedef std::chrono::time_point<steadyTimer_t, nanosecDuration_t> timestamp_t;
+using steadyTimer_t = std::chrono::steady_clock;
+using nanosecDuration_t = std::chrono::duration<long, std::ratio<1, 1000000000>>;
+using timestamp_t = std::chrono::time_point<steadyTimer_t, nanosecDuration_t>;
 
+using std::array;
 using std::cout;
 using std::endl;
 using std::format;
+using std::getline;
+using std::regex;
+using std::string;
+using std::unordered_map;
+using std::vector;
 
 namespace aoc
 {

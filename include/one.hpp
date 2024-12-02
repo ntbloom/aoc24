@@ -19,8 +19,8 @@ class One final : public Day<size_t>
     size_t two () final;
 
   private:
-    std::vector<size_t> left, right;
+    vector<size_t> left, right;
 
-    std::unordered_map<size_t, size_t> occurrences;
+    unordered_map<size_t, size_t> occurrences;
 };
 } // aoc

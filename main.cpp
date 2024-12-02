@@ -6,7 +6,7 @@
 // clang-format off
 #include "day.hpp"
 #include "one.hpp"
-//#include "two.hpp"
+#include "two.hpp"
 //#include "three.hpp"
 //#include "four.hpp"
 //#include "five.hpp"
@@ -97,8 +97,8 @@ main (int argc, char **argv)
         {
         case 1:
             return getSolution<aoc::One> (puzzle);
-            //        case 2:
-            //            return getSolution<aoc::Two> (puzzle);
+        case 2:
+            return getSolution<aoc::Two> (puzzle);
             //        case 3:
             //            return getSolution<aoc::Three> (puzzle);
             //        case 4:

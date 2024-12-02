@@ -13,7 +13,7 @@ cmake:
 
 .PHONY:build
 build:
-	cmake --build $(OUTDIR) -j `nproc`
+	cmake --build $(OUTDIR) -j 10
 
 .PHONY:clean
 clean:
