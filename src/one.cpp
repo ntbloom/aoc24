@@ -34,7 +34,42 @@ aoc::One::one() {
 
 size_t
 aoc::One::two() {
-    return -2;
+    size_t answer = 0;
+    assert (this->filestream);
+    while (this->filestream) {
+        std::string line;
+        std::getline(this->filestream, line);
+        if (line.compare("") == 0) {
+            break;
+        }
+
+        static constexpr auto beginOne = 0;
+        static constexpr auto beginTwo = 8;
+        static constexpr auto size = 5;
+        auto first = static_cast<size_t>(std::stoi(line.substr(beginOne, size)));
+        auto second = static_cast<size_t>(std::stoi(line.substr(beginTwo, size)));
+        this->left.emplace_back(first);
+        this->right.emplace_back(second);
+    }
+    std::sort(this->left.begin(), this->left.end());
+    std::sort(this->right.begin(), this->right.end());
+    assert(this->left.size() == this->right.size());
+
+    for (auto num: this->right) {
+        if (this->occurrences.contains(num)) {
+            auto current = this->occurrences.at(num);
+            current++;
+            this->occurrences.at(num) = current;
+        } else {
+            this->occurrences.emplace(std::pair<size_t, size_t>(num, 1));
+        }
+    }
+
+    for (auto num: this->left) {
+        auto multiplier = this->occurrences.contains(num) ? this->occurrences.at(num) : 0;
+        answer += num * multiplier;
+    }
+    return answer;
 }
 
 aoc::One::~One() = default;

@@ -3,6 +3,9 @@
 
 #include "day.hpp"
 
+#include <vector>
+#include <unordered_map>
+
 namespace aoc {
     class One final : public Day<size_t> {
     public:
@@ -16,6 +19,8 @@ namespace aoc {
 
     private:
         std::vector<size_t> left, right;
+
+        std::unordered_map<size_t, size_t> occurrences;
     };
 } // aoc
 
