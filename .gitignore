@@ -1,0 +1,6 @@
+.idea/
+*.swp
+cmake-build-debug/
+build/
+inputs/*
+!inputs/.gitkeep
