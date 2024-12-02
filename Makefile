@@ -3,13 +3,17 @@ OUTDIR=$(PWD)/build
 EXE=$(OUTDIR)/aoc23
 TEST_EXE=$(OUTDIR)/mainTest
 
+
+CMAKE_FLAGS= -B$(OUTDIR)
+CMAKE_FLAGS+=-G Ninja
+CMAKE_FLAGS+=-DCMAKE_BUILD_TYPE=Debug
 .PHONY:cmake
 cmake:
-	cmake -B$(OUTDIR) -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles"
+	cmake $(CMAKE_FLAGS)
 
 .PHONY:build
 build:
-	make -C $(OUTDIR) -j 14
+	cmake --build $(OUTDIR) -j `nproc`
 
 .PHONY:clean
 clean:

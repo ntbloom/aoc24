@@ -1,10 +1,13 @@
 #include "one.hpp"
 #include <cmath>
 
-aoc::One::One () : Day<size_t> (1) {}
+namespace aoc
+{
+
+One::One () : Day<size_t> (1) {}
 
 size_t
-aoc::One::one ()
+One::one ()
 {
     size_t answer = 0;
     assert (this->filestream);
@@ -37,7 +40,7 @@ aoc::One::one ()
 }
 
 size_t
-aoc::One::two ()
+One::two ()
 {
     size_t answer = 0;
     assert (this->filestream);
@@ -58,8 +61,6 @@ aoc::One::two ()
             this->left.emplace_back (first);
             this->right.emplace_back (second);
         }
-    std::sort (this->left.begin (), this->left.end ());
-    std::sort (this->right.begin (), this->right.end ());
     assert (this->left.size () == this->right.size ());
 
     for (auto num : this->right)
@@ -84,4 +85,6 @@ aoc::One::two ()
     return answer;
 }
 
-aoc::One::~One () = default;
+One::~One () = default;
+
+} // aoc
