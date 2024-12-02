@@ -6,4 +6,3 @@
 // clang-format on
 
 using namespace aoc;
-
