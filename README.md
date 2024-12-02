@@ -1,6 +1,6 @@
-# aoc23
+# aoc24
 
-[Advent of Code 2023](https://adventofcode.com/2023/) in C++.
+[Advent of Code 2024](https://adventofcode.com/2024/) in C++.
 
 ### How to start a new day
 
@@ -13,7 +13,11 @@ to return.
 ./addDay -i 2 -s two string
 ```
 
-Uncomment the headers and day in the switch statement in `main.cpp` and you should have an empty
+Uncomment the headers and day in the switch statement in `main.cpp` and you should have a stubbed out `<number>.cpp`
+file in the `src/` directory and `<number>.hpp` file in the `include/` directory.
+
+Write unit tests in `test/unit_tests.cpp` if needed, or keep track of answers in `test/test_solutions.cpp` after you've
+successfully solved a puzzle.
 
 ### How to run
 
