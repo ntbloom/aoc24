@@ -1,27 +1,26 @@
-#ifndef AOC23_ONE_HPP
-#define AOC23_ONE_HPP
+#pragma once
 
 #include "day.hpp"
 
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
-namespace aoc {
-    class One final : public Day<size_t> {
-    public:
-        One();
+namespace aoc
+{
+class One final : public Day<size_t>
+{
+  public:
+    One ();
 
-        ~One() final;
+    ~One () final;
 
-        size_t one() final;
+    size_t one () final;
 
-        size_t two() final;
+    size_t two () final;
 
-    private:
-        std::vector<size_t> left, right;
+  private:
+    std::vector<size_t> left, right;
 
-        std::unordered_map<size_t, size_t> occurrences;
-    };
+    std::unordered_map<size_t, size_t> occurrences;
+};
 } // aoc
-
-#endif // AOC23_ONE_HPP

@@ -1,5 +1,4 @@
-#ifndef AOC23_TEMPLATE_HPP
-#define AOC23_TEMPLATE_HPP
+#pragma once
 
 #include "day.hpp"
 
@@ -17,5 +16,3 @@ class Template final : public Day<TYPE>
     TYPE two () final;
 };
 } // aoc
-
-#endif // AOC23_TEMPLATE_HPP
