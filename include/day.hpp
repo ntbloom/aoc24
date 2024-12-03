@@ -51,6 +51,7 @@ template <typename T> class Day
             {
                 throw std::runtime_error ("unable to open file");
             }
+        assert (this->filestream);
     }
 
     virtual ~Day () { this->filestream.close (); };

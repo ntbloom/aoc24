@@ -47,7 +47,7 @@ TEMPLATE_CPP=$TEMPLATE_DIR/_TEMPLATE.cpp
 NEW_HPP=$INCLUDE_DIR/$DAY_STR.hpp
 NEW_CPP=$SRC_DIR/$DAY_STR.cpp
 
-for file in $NEW_HPP $NEW_CPP $NEW_INPUT
+for file in $NEW_HPP $NEW_CPP
 do
   if [ -f "$file" ]; then
     echo "$file already exists!"
