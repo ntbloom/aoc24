@@ -20,5 +20,9 @@ class Two final : public Day<size_t>
     size_t one () final;
 
     size_t two () final;
+
+    size_t answerOne () final;
+
+    size_t answerTwo () final;
 };
 } // aoc

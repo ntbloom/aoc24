@@ -18,6 +18,10 @@ class One final : public Day<size_t>
 
     size_t two () final;
 
+    size_t answerOne () final;
+
+    size_t answerTwo () final;
+
   private:
     vector<size_t> left, right;
 

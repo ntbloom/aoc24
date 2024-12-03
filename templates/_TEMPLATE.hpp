@@ -14,5 +14,9 @@ class Template final : public Day<TYPE>
     TYPE one () final;
 
     TYPE two () final;
+
+    TYPE answerOne () final;
+
+    TYPE answerTwo () final;
 };
 } // aoc

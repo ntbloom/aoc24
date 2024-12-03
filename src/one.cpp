@@ -6,6 +6,8 @@ namespace aoc
 
 One::One () : Day<size_t> (1) {}
 
+One::~One () = default;
+
 size_t
 One::one ()
 {
@@ -84,7 +86,16 @@ One::two ()
         }
     return answer;
 }
+size_t
+One::answerOne ()
+{
+    return 1651298;
+}
 
-One::~One () = default;
+size_t
+One::answerTwo ()
+{
+    return 21306195;
+}
 
 } // aoc

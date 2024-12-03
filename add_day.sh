@@ -46,7 +46,6 @@ TEMPLATE_CPP=$TEMPLATE_DIR/_TEMPLATE.cpp
 # src files to be created
 NEW_HPP=$INCLUDE_DIR/$DAY_STR.hpp
 NEW_CPP=$SRC_DIR/$DAY_STR.cpp
-NEW_INPUT=$INPUT_DIR/$DAY_NUM.txt
 
 for file in $NEW_HPP $NEW_CPP $NEW_INPUT
 do
@@ -63,7 +62,6 @@ make_files()
 {
   cp $TEMPLATE_HPP "$NEW_HPP"
   cp $TEMPLATE_CPP "$NEW_CPP"
-  touch "$NEW_INPUT"
 }
 
 findReplace()

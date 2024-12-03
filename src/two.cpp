@@ -5,6 +5,8 @@ namespace aoc
 
 Two::Two () : Day<size_t> (2) {}
 
+Two::~Two () = default;
+
 size_t
 Two::one ()
 {
@@ -191,6 +193,16 @@ Two::secondTry (const vector<int> &vec)
     return false;
 }
 
-Two::~Two () = default;
+size_t
+Two::answerOne ()
+{
+    return 510;
+}
+
+size_t
+Two::answerTwo ()
+{
+    return 553;
+}
 
 } // aoc

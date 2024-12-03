@@ -29,25 +29,55 @@
 // clang-format on
 
 using namespace aoc;
+using std::make_unique;
 
-TEST (One, One)
+template <typename T> class TestDay : public testing::Test
 {
-    One one{};
-    EXPECT_EQ (one.solve (1), 1651298);
-}
-TEST (One, Two)
-{
-    One one{};
-    EXPECT_EQ (one.solve (2), 21306195);
-}
+  public:
+    void
+    testOne ()
+    {
+        auto day = make_unique<T> ();
+        ASSERT_EQ (day->solve (1), day->answerOne ());
+    }
 
-TEST (Two, One)
-{
-    Two two{};
-    EXPECT_EQ (two.solve (1), 510);
-}
-TEST (Two, Two)
-{
-    Two two{};
-    EXPECT_EQ (two.solve (2), 553);
-}
+    void
+    testTwo ()
+    {
+        auto day = make_unique<T> ();
+        ASSERT_EQ (day->solve (2), day->answerTwo ());
+    }
+};
+TYPED_TEST_SUITE_P (TestDay);
+
+TYPED_TEST_P (TestDay, PartOne) { this->testOne (); }
+TYPED_TEST_P (TestDay, PartTwo) { this->testTwo (); }
+
+REGISTER_TYPED_TEST_SUITE_P (TestDay, PartOne, PartTwo);
+
+using dayTypes = ::testing::Types<One, Two
+                                  //    ,Three
+                                  //    ,Four
+                                  //    ,Five
+                                  //    ,Six
+                                  //    ,Seven
+                                  //    ,Eight
+                                  //    ,Nine
+                                  //    ,Ten
+                                  //    ,Eleven
+                                  //    ,Twelve
+                                  //    ,Thirteen
+                                  //    ,Fourteen
+                                  //    ,Fifteen
+                                  //    ,Sixteen
+                                  //    ,Seventeen
+                                  //    ,Eighteen
+                                  //    ,Nineteen
+                                  //    ,Twenty
+                                  //    ,TwentyOne
+                                  //    ,TwentyTwo
+                                  //    ,TwentyThree
+                                  //    ,TwentyFour
+                                  //    ,TwentyFive
+                                  >;
+INSTANTIATE_TYPED_TEST_SUITE_P (ParametrizedDayTests, TestDay, dayTypes);
