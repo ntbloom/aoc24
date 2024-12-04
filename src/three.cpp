@@ -5,7 +5,6 @@ namespace aoc
 
 Three::Three () : Day<size_t> (3)
 {
-
     while (this->filestream)
         {
             string line;
@@ -17,6 +16,7 @@ Three::Three () : Day<size_t> (3)
             this->complete += line;
         }
 }
+
 Three::~Three () = default;
 
 size_t
@@ -59,17 +59,6 @@ Three::two ()
 }
 
 size_t
-Three::answerOne ()
-{
-    return 188192787;
-}
-
-size_t
-Three::answerTwo ()
-{
-    return 113965544;
-}
-size_t
 Three::process (const string &line)
 {
     size_t answer = 0;
@@ -84,6 +73,18 @@ Three::process (const string &line)
             iter = match.suffix ().first;
         }
     return answer;
+}
+
+size_t
+Three::answerOne ()
+{
+    return 188192787;
+}
+
+size_t
+Three::answerTwo ()
+{
+    return 113965544;
 }
 
 } // aoc

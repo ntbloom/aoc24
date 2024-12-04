@@ -2,20 +2,17 @@
 
 #include "day.hpp"
 
+using safeFunc = bool (const vector<int> &);
+
 namespace aoc
 {
+
 class Two final : public Day<size_t>
 {
   public:
     Two ();
 
     ~Two () final;
-
-    static bool isSafe (const vector<int> &vec);
-
-    static bool isSafe2 (const vector<int> &vec);
-
-    static bool secondTry (const vector<int> &vec);
 
     size_t one () final;
 
@@ -24,5 +21,14 @@ class Two final : public Day<size_t>
     size_t answerOne () final;
 
     size_t answerTwo () final;
+
+  private:
+    size_t getAnswer (safeFunc func);
+
+    static bool isSafe (const vector<int> &vec);
+
+    static bool isSafe2 (const vector<int> &vec);
+
+    static bool secondTry (const vector<int> &vec);
 };
 } // aoc

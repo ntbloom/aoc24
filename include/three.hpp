@@ -19,9 +19,9 @@ class Three final : public Day<size_t>
 
     size_t answerTwo () final;
 
-    static size_t process (const string &line);
-
   private:
     string complete;
+
+    static size_t process (const string &line);
 };
 } // aoc

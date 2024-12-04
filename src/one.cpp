@@ -4,15 +4,8 @@
 namespace aoc
 {
 
-One::One () : Day<size_t> (1) {}
-
-One::~One () = default;
-
-size_t
-One::one ()
+One::One () : Day<size_t> (1)
 {
-    size_t answer = 0;
-    assert (this->filestream);
     while (this->filestream)
         {
             string line;
@@ -30,10 +23,18 @@ One::one ()
             this->left.emplace_back (first);
             this->right.emplace_back (second);
         }
+    assert (left.size () == right.size ());
+}
+
+One::~One () = default;
+
+size_t
+One::one ()
+{
     std::sort (this->left.begin (), this->left.end ());
     std::sort (this->right.begin (), this->right.end ());
-    assert (left.size () == right.size ());
 
+    size_t answer = 0;
     for (size_t i = 0; i < left.size (); i++)
         {
             answer += std::abs (static_cast<long> ((left.at (i) - right.at (i))));
@@ -45,26 +46,6 @@ size_t
 One::two ()
 {
     size_t answer = 0;
-    assert (this->filestream);
-    while (this->filestream)
-        {
-            string line;
-            getline (this->filestream, line);
-            if (line.empty ())
-                {
-                    break;
-                }
-
-            static constexpr auto beginOne = 0;
-            static constexpr auto beginTwo = 8;
-            static constexpr auto size = 5;
-            auto first = static_cast<size_t> (std::stoi (line.substr (beginOne, size)));
-            auto second = static_cast<size_t> (std::stoi (line.substr (beginTwo, size)));
-            this->left.emplace_back (first);
-            this->right.emplace_back (second);
-        }
-    assert (this->left.size () == this->right.size ());
-
     for (auto num : this->right)
         {
             if (this->occurrences.contains (num))
@@ -78,7 +59,6 @@ One::two ()
                     this->occurrences.emplace (std::pair<size_t, size_t> (num, 1));
                 }
         }
-
     for (auto num : this->left)
         {
             auto multiplier = this->occurrences.contains (num) ? this->occurrences.at (num) : 0;

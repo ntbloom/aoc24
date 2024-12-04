@@ -18,5 +18,7 @@ class Template final : public Day<TYPE>
     TYPE answerOne () final;
 
     TYPE answerTwo () final;
+
+  private:
 };
 } // aoc

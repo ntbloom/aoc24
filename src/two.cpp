@@ -10,92 +10,13 @@ Two::~Two () = default;
 size_t
 Two::one ()
 {
-    size_t answer = 0;
-    while (this->filestream)
-        {
-            string line{};
-            getline (this->filestream, line);
-            if (line.empty ())
-                {
-                    break;
-                }
-            vector<int> nums{};
-            string substr{};
-            size_t idx = 0;
-            for (const auto &ch : line)
-                {
-                    idx++;
-                    if (isdigit (ch))
-                        {
-                            substr.push_back (ch);
-                            if (idx == line.size ())
-                                {
-                                    auto num = static_cast<int> (std::stoi (substr));
-                                    nums.emplace_back (num);
-                                    substr.clear ();
-                                }
-                        }
-                    else
-                        {
-                            auto num = static_cast<int> (std::stoi (substr));
-                            nums.emplace_back (num);
-                            substr.clear ();
-                        }
-                }
-
-            if (isSafe (nums))
-                {
-                    answer++;
-                }
-        }
-
-    return answer;
+    return getAnswer (Two::isSafe);
 }
 
 size_t
 Two::two ()
 {
-    size_t answer = 0;
-    while (this->filestream)
-        {
-            string line{};
-            getline (this->filestream, line);
-            if (line.empty ())
-                {
-                    break;
-                }
-            vector<int> nums{};
-            string substr{};
-            size_t idx = 0;
-            for (const auto &ch : line)
-                {
-
-                    idx++;
-                    if (isdigit (ch))
-                        {
-                            substr.push_back (ch);
-                            if (idx == line.size ())
-                                {
-                                    auto num = static_cast<int> (std::stoi (substr));
-                                    nums.emplace_back (num);
-                                    substr.clear ();
-                                }
-                        }
-                    else
-                        {
-                            auto num = static_cast<int> (std::stoi (substr));
-                            nums.emplace_back (num);
-                            substr.clear ();
-                        }
-                }
-
-            if (isSafe2 (nums))
-                {
-                    answer++;
-                }
-        }
-
-    return answer;
+    return getAnswer (Two::isSafe2);
 }
 
 bool
@@ -177,6 +98,7 @@ Two::isSafe2 (const vector<int> &vec)
 
     return true;
 }
+
 bool
 Two::secondTry (const vector<int> &vec)
 {
@@ -191,6 +113,52 @@ Two::secondTry (const vector<int> &vec)
                 }
         }
     return false;
+}
+
+size_t
+Two::getAnswer (safeFunc func)
+{
+    size_t answer = 0;
+    while (this->filestream)
+        {
+            string line{};
+            getline (this->filestream, line);
+            if (line.empty ())
+                {
+                    break;
+                }
+            vector<int> nums{};
+            string substr{};
+            size_t idx = 0;
+            for (const auto &ch : line)
+                {
+
+                    idx++;
+                    if (isdigit (ch))
+                        {
+                            substr.push_back (ch);
+                            if (idx == line.size ())
+                                {
+                                    auto num = static_cast<int> (std::stoi (substr));
+                                    nums.emplace_back (num);
+                                    substr.clear ();
+                                }
+                        }
+                    else
+                        {
+                            auto num = static_cast<int> (std::stoi (substr));
+                            nums.emplace_back (num);
+                            substr.clear ();
+                        }
+                }
+
+            if (func (nums))
+                {
+                    answer++;
+                }
+        }
+
+    return answer;
 }
 
 size_t
