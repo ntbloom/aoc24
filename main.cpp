@@ -8,7 +8,7 @@
 #include "one.hpp"
 #include "two.hpp"
 #include "three.hpp"
-//#include "four.hpp"
+#include "four.hpp"
 //#include "five.hpp"
 //#include "six.hpp"
 //#include "seven.hpp"
@@ -101,8 +101,8 @@ main (int argc, char **argv)
             return getSolution<aoc::Two> (puzzle);
         case 3:
             return getSolution<aoc::Three> (puzzle);
-            //        case 4:
-            //            return getSolution<aoc::Four> (puzzle);
+        case 4:
+            return getSolution<aoc::Four> (puzzle);
             //        case 5:
             //            return getSolution<aoc::Five> (puzzle);
             //        case 6:
