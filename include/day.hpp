@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 using steadyTimer_t = std::chrono::steady_clock;
@@ -22,10 +23,15 @@ using std::cout;
 using std::endl;
 using std::format;
 using std::getline;
+using std::make_shared;
+using std::make_unique;
 using std::regex;
+using std::shared_ptr;
 using std::string;
 using std::stringstream;
+using std::unique_ptr;
 using std::unordered_map;
+using std::unordered_set;
 using std::vector;
 
 namespace aoc
