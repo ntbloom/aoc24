@@ -40,11 +40,10 @@ Five::Five () : Day<int> (5)
 
                     this->updates.emplace_back (update);
                 }
-            for (size_t i = 0; i < 100; i++)
-                {
-                    this->befores->insert (
-                        std::pair<int, unordered_set<int>> (i, unordered_set<int>{}));
-                }
+        }
+    for (size_t i = 0; i < 100; i++)
+        {
+            this->befores->insert (std::pair<int, unordered_set<int>> (i, unordered_set<int>{}));
         }
     for (const auto &order : this->orders)
         {

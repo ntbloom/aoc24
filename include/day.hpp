@@ -10,6 +10,7 @@
 #include <regex>
 #include <sstream>
 #include <string>
+#include <thread>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -33,6 +34,14 @@ using std::unique_ptr;
 using std::unordered_map;
 using std::unordered_set;
 using std::vector;
+using std::chrono::milliseconds;
+using std::this_thread::sleep_for;
+
+namespace termcolor
+{
+static constexpr const char *RED = "\033[0;31m";
+static constexpr const char *RESET = "\033[0m";
+};
 
 namespace aoc
 {
