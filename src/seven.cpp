@@ -3,9 +3,10 @@
 namespace aoc
 {
 
-Seven::Seven () : Day<long> (7), equations (new vector<equation *> ())
+Seven::Seven () : Day<long> (7)
 {
     regex pattern ("(\\d+)");
+    size_t idx = 0;
     while (this->filestream)
         {
             string line{};
@@ -14,25 +15,22 @@ Seven::Seven () : Day<long> (7), equations (new vector<equation *> ())
                 {
                     break;
                 }
-            auto numbers = make_shared<vector<long>> ();
             char *end;
             long first = strtol (line.substr (0, line.find (':')).c_str (), &end, 10);
+            equations.emplace_back (make_shared<equation> (first, vector<long>{}));
 
             std::smatch match;
-            const auto remainder = line.substr (line.find (':') + 1, line.size () - 1);
-            string::const_iterator iter (remainder.cbegin ());
-            while (std::regex_search (iter, remainder.end (), match, pattern))
+            const auto remaining = line.substr (line.find (':') + 1, line.size () - 1);
+            string::const_iterator iter (remaining.cbegin ());
+            while (std::regex_search (iter, remaining.end (), match, pattern))
                 {
                     auto size = match.size ();
                     long num = strtol (match[0].str ().c_str (), &end, 10);
-                    numbers->emplace_back (num);
+                    equations.at (idx)->second.emplace_back (num);
                     iter = match.suffix ().first;
                 }
-
-            auto eq = make_shared<equation> (first, numbers.get ());
-            equations->emplace_back (eq.get ());
+            idx++;
         }
-    cout << "";
 }
 
 Seven::~Seven () = default;
@@ -40,15 +38,6 @@ Seven::~Seven () = default;
 long
 Seven::one ()
 {
-    for (auto line : *equations)
-        {
-            cout << line->first << "\n";
-            //            for (auto num : *line->second)
-            //                {
-            //                    cout << num << " ";
-            //                }
-            //            cout << "\n";
-        }
     return -1;
 }
 

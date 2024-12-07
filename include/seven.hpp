@@ -20,7 +20,7 @@ class Seven final : public Day<long>
     long answerTwo () final;
 
   private:
-    using equation = pair<long, vector<long> *>;
-    shared_ptr<vector<equation *>> equations;
+    using equation = pair<long, vector<long>>;
+    vector<shared_ptr<equation>> equations{};
 };
 } // aoc
