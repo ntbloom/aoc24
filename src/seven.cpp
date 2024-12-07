@@ -104,10 +104,6 @@ Seven::calculate (const Seven::remaining_t &nums, Seven::operators_t &operators,
 {
     assert (nums.size () - 1 == operators.size ());
 
-    if (target == 108330 && operators == "mmamam")
-        {
-            auto i = 0;
-        }
     long answer = nums.at (0);
     for (size_t i = 1, opIdx = 0; i < nums.size (); i++, opIdx++)
         {
@@ -116,12 +112,10 @@ Seven::calculate (const Seven::remaining_t &nums, Seven::operators_t &operators,
                     return 0;
                 }
             char op = operators.at (opIdx);
-            long intermed;
             switch (op)
                 {
                 case 'm':
-                    intermed = answer * nums.at (i);
-                    answer = intermed;
+                    answer *= nums.at (i);
                     break;
                 case 'a':
                     answer += nums.at (i);

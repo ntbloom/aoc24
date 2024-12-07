@@ -2,8 +2,6 @@
 
 #include "day.hpp"
 
-#include <gtest/gtest.h>
-
 namespace aoc
 {
 class Seven final : public Day<long>
@@ -29,6 +27,6 @@ class Seven final : public Day<long>
     long getCalibration (const Seven::equation_t &eq);
 
     using operators_t = string;
-    long calculate (const remaining_t &nums, operators_t &operators, long target);
+    static long calculate (const remaining_t &nums, operators_t &operators, long target);
 };
 } // aoc
