@@ -44,6 +44,8 @@ Seven::one ()
             count += getCalibration (*eq);
         }
 
+    assert (count > 654933917946);
+    assert (count < 175653415269101);
     return count;
 }
 
@@ -58,16 +60,28 @@ Seven::getCalibration (const Seven::equation_t &eq)
 {
     auto total = eq.first;
     auto numbers = eq.second;
-    operators_t allAddition{}, allMultiplication{};
+    string operations{};
     for (auto i = 0; i < numbers.size () - 1; i++)
         {
-            allAddition.push (operation::ADD);
-            allMultiplication.push (operation::MULT);
+            operations += 'm';
         }
-    if ((calculate (numbers, allAddition, total) != 0)
-        || (calculate (numbers, allMultiplication, total) != 0))
+    assert (operations.size () == numbers.size () - 1);
+    if (calculate (numbers, operations, total) != 0)
         {
+            cout << "all mult works";
             return total;
+        }
+    for (auto i = 0; i < numbers.size () - 1; i++)
+        {
+            operations.at (i) = 'a';
+            while (std::next_permutation (operations.begin (), operations.end ()))
+                {
+                    if (calculate (numbers, operations, total) != 0)
+                        {
+                            cout << "all add works" << endl;
+                            return total;
+                        }
+                }
         }
 
     return 0;
@@ -76,31 +90,30 @@ Seven::getCalibration (const Seven::equation_t &eq)
 long
 Seven::calculate (const Seven::remaining_t &nums, Seven::operators_t &operators, long target)
 {
-    assert (nums.size () == operators.size () + 1);
+    cout << operators << endl;
+    assert (nums.size () - 1 == operators.size ());
+
     long answer = nums.at (0);
-    for (size_t i = 1; i < nums.size (); i++)
+    for (size_t i = 1, opIdx = 0; i < nums.size (); i++, opIdx++)
         {
             if (answer > target)
                 {
                     return 0;
                 }
-            auto current = operators.front ();
-            operators.pop ();
-
-            switch (current)
+            char op = operators.at (opIdx);
+            switch (op)
                 {
-                case operation::MULT:
-                    answer *= nums.at (i);
+                case 'm':
+                    answer *= nums.at (opIdx);
                     break;
-                case operation::ADD:
-                    answer += nums.at (i);
+                case 'a':
+                    answer += nums.at (opIdx);
                     break;
                 default:
                     throw std::runtime_error ("Illegal operator");
                 }
         }
-    assert (operators.empty ());
-    return answer;
+    return answer == target ? answer : 0;
 }
 
 long

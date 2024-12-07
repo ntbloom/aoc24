@@ -26,12 +26,7 @@ class Seven final : public Day<long>
 
     long getCalibration (const Seven::equation_t &eq);
 
-    enum class operation : uint8_t
-    {
-        MULT,
-        ADD,
-    };
-    using operators_t = queue<operation>;
+    using operators_t = string;
     long calculate (const remaining_t &nums, operators_t &operators, long target);
 };
 } // aoc
