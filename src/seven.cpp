@@ -44,7 +44,7 @@ Seven::one ()
             count += getCalibration (*eq);
         }
 
-    assert (count > 654933917946);
+    assert (count > 654933925574);
     assert (count < 175653415269101);
     return count;
 }
@@ -61,16 +61,28 @@ Seven::getCalibration (const Seven::equation_t &eq)
     auto total = eq.first;
     auto numbers = eq.second;
     string operations{};
+    string allAdd{};
     for (auto i = 0; i < numbers.size () - 1; i++)
         {
             operations += 'm';
+            allAdd += 'a';
         }
     assert (operations.size () == numbers.size () - 1);
+
+    /* check all multiply */
     if (calculate (numbers, operations, total) != 0)
         {
-            cout << "all mult works";
+            cout << "all mult works\n";
             return total;
         }
+    /* check all add */
+    if (calculate (numbers, allAdd, total) != 0)
+        {
+            cout << "all add works\n";
+            return total;
+        }
+
+    /* check all permutation */
     for (auto i = 0; i < numbers.size () - 1; i++)
         {
             operations.at (i) = 'a';
@@ -78,7 +90,7 @@ Seven::getCalibration (const Seven::equation_t &eq)
                 {
                     if (calculate (numbers, operations, total) != 0)
                         {
-                            cout << "all add works" << endl;
+                            cout << "mixed works\n";
                             return total;
                         }
                 }
@@ -90,9 +102,12 @@ Seven::getCalibration (const Seven::equation_t &eq)
 long
 Seven::calculate (const Seven::remaining_t &nums, Seven::operators_t &operators, long target)
 {
-    cout << operators << endl;
     assert (nums.size () - 1 == operators.size ());
 
+    if (target == 108330 && operators == "mmamam")
+        {
+            auto i = 0;
+        }
     long answer = nums.at (0);
     for (size_t i = 1, opIdx = 0; i < nums.size (); i++, opIdx++)
         {
@@ -101,13 +116,15 @@ Seven::calculate (const Seven::remaining_t &nums, Seven::operators_t &operators,
                     return 0;
                 }
             char op = operators.at (opIdx);
+            long intermed;
             switch (op)
                 {
                 case 'm':
-                    answer *= nums.at (opIdx);
+                    intermed = answer * nums.at (i);
+                    answer = intermed;
                     break;
                 case 'a':
-                    answer += nums.at (opIdx);
+                    answer += nums.at (i);
                     break;
                 default:
                     throw std::runtime_error ("Illegal operator");

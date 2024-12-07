@@ -2,6 +2,8 @@
 
 #include "day.hpp"
 
+#include <gtest/gtest.h>
+
 namespace aoc
 {
 class Seven final : public Day<long>
