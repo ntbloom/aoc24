@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <numeric>
+#include <queue>
 #include <regex>
 #include <sstream>
 #include <string>
@@ -30,6 +31,7 @@ using std::getline;
 using std::make_shared;
 using std::make_unique;
 using std::pair;
+using std::queue;
 using std::regex;
 using std::regex_search;
 using std::shared_ptr;
