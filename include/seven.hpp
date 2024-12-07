@@ -22,5 +22,7 @@ class Seven final : public Day<long>
   private:
     using equation = pair<long, vector<long>>;
     vector<shared_ptr<equation>> equations{};
+
+    long getCalibration (const Seven::equation &eq);
 };
 } // aoc

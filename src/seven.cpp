@@ -38,13 +38,45 @@ Seven::~Seven () = default;
 long
 Seven::one ()
 {
-    return -1;
+    long count = 0;
+    for (const auto &eq : this->equations)
+        {
+            count += getCalibration (*eq);
+        }
+
+    return count;
 }
 
 long
 Seven::two ()
 {
     return -2;
+}
+
+long
+Seven::getCalibration (const Seven::equation &eq)
+{
+    auto total = eq.first;
+    auto numbers = eq.second;
+
+    if (accumulate (numbers.begin (), numbers.end (), 0) == total)
+        {
+            return total;
+        }
+    const auto product = [] (const vector<long> &_nums) {
+        long answer = 0;
+        for (size_t i = 1; i < _nums.size (); i++)
+            {
+                answer += _nums.at (i) * _nums.at (i - 1);
+            }
+        return answer;
+    };
+    if (product (numbers) == total)
+        {
+            return total;
+        };
+
+    return 0;
 }
 
 long
