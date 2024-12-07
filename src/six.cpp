@@ -58,7 +58,6 @@ int
 Six::one ()
 {
     auto answer = search (this->start, Direction::UP, 0);
-    printMap ();
     return answer;
 }
 
