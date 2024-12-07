@@ -4,6 +4,7 @@ namespace aoc
 {
 
 Template::Template () : Day<TYPE> (X) {}
+
 Template::~Template () = default;
 
 TYPE
