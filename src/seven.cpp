@@ -85,7 +85,6 @@ Seven::getCalibration (const Seven::equation_t &eq)
                     possibles.insert (operations);
                 }
         }
-    assert (possibles.size () == (1 << (numbers.size () - 1)));
     for (auto line : possibles)
         {
             if (calculate (numbers, line, total) == total)
@@ -100,8 +99,6 @@ Seven::getCalibration (const Seven::equation_t &eq)
 long
 Seven::calculate (const Seven::remaining_t &nums, Seven::operators_t &operators, long target)
 {
-    assert (nums.size () - 1 == operators.size ());
-
     long answer = nums.at (0);
     for (size_t i = 1, opIdx = 0; i < nums.size (); i++, opIdx++)
         {
