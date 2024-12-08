@@ -32,6 +32,5 @@ class Seven final : public Day<long>
     static long calculateWithCat (const remaining_t &nums, operators_t &operators, long target);
 
     static void makeStrings (size_t len, unordered_set<string> *options);
-    static void appendString (string &str, char ch, size_t len, unordered_set<string> *options);
 };
 } // aoc

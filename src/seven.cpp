@@ -54,6 +54,7 @@ Seven::two ()
         {
             count += getCalibrationWithCat (*eq);
         }
+    assert (count > 770405823023);
     return count;
 }
 
@@ -97,15 +98,21 @@ Seven::getCalibrationWithCat (const Seven::equation_t &eq)
 {
     auto total = eq.first;
     auto numbers = eq.second;
-    auto possibles = make_shared<unordered_set<string>> ();
-    makeStrings (numbers.size () - 1, possibles.get ());
+    auto *possibles = new unordered_set<string> ();
+    makeStrings (numbers.size () - 1, possibles);
+    if (numbers.size () == 3)
+        {
+            cout << "";
+        }
     for (auto line : *possibles)
         {
             if (calculateWithCat (numbers, line, total) == total)
                 {
+                    delete possibles;
                     return total;
                 }
         }
+    delete possibles;
     return 0;
 }
 
@@ -170,39 +177,40 @@ Seven::calculateWithCat (const Seven::remaining_t &nums, Seven::operators_t &ope
 void
 Seven::makeStrings (size_t len, unordered_set<string> *options)
 {
-    string option{};
-    for (auto m = 0; m < len; m++)
+    string str{};
+    if (len == 2)
         {
-            for (auto a = 0; a < len; a++)
+            cout << "";
+        }
+    for (size_t m = 0; m < len + 1; m++)
+        {
+            for (size_t a = 0; a < len - m + 1; a++)
                 {
                     auto c = len - m - a;
                     assert (m + a + c == len);
-                    for (auto i = 0; i < m; i++)
+                    for (size_t i = 0; i < m; i++)
                         {
-                            options += 'm';
+                            str += 'm';
                         }
-                    for (auto i = 0; i < a; i++)
+                    for (size_t i = 0; i < a; i++)
                         {
-                            options += 'a';
+                            str += 'a';
                         }
-                    for (auto i = 0; i < c; i++)
+                    for (size_t i = 0; i < c; i++)
                         {
-                            options += 'c';
+                            str += 'c';
                         }
+
+                    assert (str.size () == len);
+                    cout << str << "\n";
+                    options->insert (str);
+                    while (std::next_permutation (str.begin (), str.end ()))
+                        {
+                            options->insert (str);
+                        }
+                    str.clear ();
                 }
         }
-    assert (option.size () == len);
-}
-
-void
-Seven::appendString (string &str, char ch, size_t len, unordered_set<string> *options)
-{
-    if (str.size () == len)
-        {
-            options->insert (str);
-            return;
-        }
-    return appendString (str, ch, len, options);
 }
 
 long
