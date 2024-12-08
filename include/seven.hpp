@@ -24,7 +24,7 @@ class Seven final : public Day<long>
     using equation_t = pair<long, remaining_t>;
     vector<shared_ptr<equation_t>> equations{};
 
-    long getCalibration (const Seven::equation_t &eq);
+    static long getCalibration (const Seven::equation_t &eq);
 
     using operators_t = string;
     static long calculate (const remaining_t &nums, operators_t &operators, long target);

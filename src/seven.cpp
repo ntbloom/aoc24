@@ -41,7 +41,11 @@ Seven::one ()
     long count = 0;
     for (const auto &eq : this->equations)
         {
-            count += getCalibration (*eq);
+            auto ans = getCalibration (*eq);
+            if (eq->first == ans)
+                {
+                    count += ans;
+                }
         }
 
     assert (count > 654933925574);
@@ -60,39 +64,36 @@ Seven::getCalibration (const Seven::equation_t &eq)
 {
     auto total = eq.first;
     auto numbers = eq.second;
-    string operations{};
     string allAdd{};
+    string allMult{};
     for (auto i = 0; i < numbers.size () - 1; i++)
         {
-            operations += 'm';
+            allMult += 'm';
             allAdd += 'a';
         }
-    assert (operations.size () == numbers.size () - 1);
-
-    /* check all multiply */
-    if (calculate (numbers, operations, total) != 0)
+    unordered_set<string> possibles{};
+    possibles.insert (allAdd);
+    possibles.insert (allMult);
+    auto operations = allMult;
+    if (operations == "mmmm")
         {
-            cout << "all mult works\n";
-            return total;
+            cout << "";
         }
-    /* check all add */
-    if (calculate (numbers, allAdd, total) != 0)
-        {
-            cout << "all add works\n";
-            return total;
-        }
-
-    /* check all permutation */
     for (auto i = 0; i < numbers.size () - 1; i++)
         {
             operations.at (i) = 'a';
+            possibles.insert (operations);
             while (std::next_permutation (operations.begin (), operations.end ()))
                 {
-                    if (calculate (numbers, operations, total) != 0)
-                        {
-                            cout << "mixed works\n";
-                            return total;
-                        }
+                    possibles.insert (operations);
+                }
+        }
+    assert (possibles.size () == (1 << (numbers.size () - 1)));
+    for (auto line : possibles)
+        {
+            if (calculate (numbers, line, total) == total)
+                {
+                    return total;
                 }
         }
 
@@ -109,28 +110,29 @@ Seven::calculate (const Seven::remaining_t &nums, Seven::operators_t &operators,
         {
             if (answer > target)
                 {
-                    return 0;
+                    return answer;
                 }
             char op = operators.at (opIdx);
+            auto number = nums.at (i);
             switch (op)
                 {
                 case 'm':
-                    answer *= nums.at (i);
+                    answer *= number;
                     break;
                 case 'a':
-                    answer += nums.at (i);
+                    answer += number;
                     break;
                 default:
                     throw std::runtime_error ("Illegal operator");
                 }
         }
-    return answer == target ? answer : 0;
+    return answer;
 }
 
 long
 Seven::answerOne ()
 {
-    return -1;
+    return 850435817339;
 }
 
 long
