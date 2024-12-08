@@ -53,7 +53,12 @@ Seven::one ()
 long
 Seven::two ()
 {
-    return -2;
+    long count = 0;
+    for (const auto &eq : this->equations)
+        {
+            count += getCalibrationWithCat (*eq);
+        }
+    return count;
 }
 
 long
@@ -72,10 +77,6 @@ Seven::getCalibration (const Seven::equation_t &eq)
     possibles.insert (allAdd);
     possibles.insert (allMult);
     auto operations = allMult;
-    if (operations == "mmmm")
-        {
-            cout << "";
-        }
     for (auto i = 0; i < numbers.size () - 1; i++)
         {
             operations.at (i) = 'a';
@@ -92,7 +93,41 @@ Seven::getCalibration (const Seven::equation_t &eq)
                     return total;
                 }
         }
+    return 0;
+}
 
+long
+Seven::getCalibrationWithCat (const Seven::equation_t &eq)
+{
+    auto total = eq.first;
+    auto numbers = eq.second;
+    string allAdd{};
+    string allMult{};
+    for (auto i = 0; i < numbers.size () - 1; i++)
+        {
+            allMult += 'm';
+            allAdd += 'a';
+        }
+    unordered_set<string> possibles{};
+    possibles.insert (allAdd);
+    possibles.insert (allMult);
+    auto operations = allMult;
+    for (auto i = 0; i < numbers.size () - 1; i++)
+        {
+            operations.at (i) = 'a';
+            possibles.insert (operations);
+            while (std::next_permutation (operations.begin (), operations.end ()))
+                {
+                    possibles.insert (operations);
+                }
+        }
+    for (auto line : possibles)
+        {
+            if (calculate (numbers, line, total) == total)
+                {
+                    return total;
+                }
+        }
     return 0;
 }
 
