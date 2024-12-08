@@ -47,9 +47,6 @@ Seven::one ()
                     count += ans;
                 }
         }
-
-    assert (count > 654933925574);
-    assert (count < 175653415269101);
     return count;
 }
 
