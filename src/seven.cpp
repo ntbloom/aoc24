@@ -41,11 +41,7 @@ Seven::one ()
     long count = 0;
     for (const auto &eq : this->equations)
         {
-            auto ans = getCalibration (*eq);
-            if (eq->first == ans)
-                {
-                    count += ans;
-                }
+            count += getCalibration (*eq);
         }
     return count;
 }
