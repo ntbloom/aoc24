@@ -90,9 +90,11 @@ Seven::two ()
                     continue;
                 }
         }
-    assert (count > 850435817339);
-    assert (count != 1299759418016);
-    assert (count != 1299662764120);
+
+    if ((count < 850435817339) || (count == 1299759418016) || (count == 1299662764120))
+        {
+            throw std::runtime_error (format ("Already guessed: {}", count));
+        }
     return count;
 }
 
