@@ -31,10 +31,10 @@ Nine::~Nine () = default;
 int
 Nine::one ()
 {
-    string parsed{};
-    parse (this->diskMap, &parsed);
-    sortMap (parsed);
-    return getChecksum (parsed);
+    auto parsed = make_shared<string> ();
+    parse (this->diskMap, parsed.get ());
+    sortMap (parsed.get ());
+    return getChecksum (*parsed);
 }
 
 int
@@ -71,9 +71,9 @@ Nine::parse (const Nine::disk_map_t &dm, string *src)
 }
 
 void
-Nine::sortMap (string &str)
+Nine::sortMap (string *str)
 {
-    swapChars (str, 0, str.size () - 1);
+    swapChars (str, 0, str->size () - 1);
 }
 
 int
@@ -84,18 +84,24 @@ Nine::getChecksum (const string &sorted)
 }
 
 void
-Nine::swapChars (string &str, size_t start, size_t end)
+Nine::swapChars (string *str, size_t start, size_t end)
 {
     if (start >= end)
         {
             return;
         }
-    auto ch = str.at (start);
+    auto ch = str->at (start);
+    cout << format ("ch={},start={},end={},str={}\n", ch, start, end, str->c_str ());
     if (ch == '.')
         {
-            auto repl = str.at (end);
-            str.at (start) = repl;
-            str.at (end--) = '.';
+            auto repl = str->at (end);
+            str->at (start) = repl;
+            str->at (end--) = '.';
+            while (str->at (end) == '.')
+                {
+                    cout << "decrementing end\n";
+                    end--;
+                }
         }
     return swapChars (str, ++start, end);
 }
