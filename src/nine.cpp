@@ -22,7 +22,7 @@ Nine::Nine () : Day<int> (9)
     assert (!line.empty ());
     for (auto ch : line)
         {
-            this->diskMap.emplace_back (ch);
+            this->diskMap.emplace_back (static_cast<int> (ch - 48));
         }
 }
 
@@ -32,9 +32,9 @@ int
 Nine::one ()
 {
     string parsed{};
-    this->parse (this->diskMap, &parsed);
-    this->sortMap (parsed);
-    return this->getChecksum (parsed);
+    parse (this->diskMap, &parsed);
+    sortMap (parsed);
+    return getChecksum (parsed);
 }
 
 int
@@ -45,8 +45,29 @@ Nine::two ()
 void
 Nine::parse (const Nine::disk_map_t &dm, string *src)
 {
-    (void)dm;
-    (void)src;
+    assert (src->empty ());
+    int idx = 0;
+    for (auto i = 0; i < dm.size (); i++)
+        {
+            auto num = dm.at (i);
+            bool even = i == 0 || (i % 2 == 0);
+            for (auto j = 0; j < num; j++)
+                {
+                    if (even)
+                        {
+                            src->append (format ("{}", idx));
+                        }
+                    else
+                        {
+                            src->append (".");
+                        }
+                }
+            if (even)
+                {
+                    idx++;
+                }
+        }
+    return;
 }
 
 void
