@@ -19,6 +19,13 @@ class Nine final : public Day<int>
 
     int answerTwo () final;
 
+    using disk_map_t = vector<char>;
+    disk_map_t diskMap{};
+
+    void parse (const disk_map_t &dm, string *src);
+    void sortMap (const string &str);
+    int getChecksum (const string &sorted);
+
   private:
 };
 } // aoc
