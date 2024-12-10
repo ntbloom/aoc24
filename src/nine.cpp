@@ -71,9 +71,9 @@ Nine::parse (const Nine::disk_map_t &dm, string *src)
 }
 
 void
-Nine::sortMap (const string &str)
+Nine::sortMap (string &str)
 {
-    (void)str;
+    swapChars (str, 0, str.size () - 1);
 }
 
 int
@@ -81,6 +81,23 @@ Nine::getChecksum (const string &sorted)
 {
     (void)sorted;
     return 0;
+}
+
+void
+Nine::swapChars (string &str, size_t start, size_t end)
+{
+    if (start >= end)
+        {
+            return;
+        }
+    auto ch = str.at (start);
+    if (ch == '.')
+        {
+            auto repl = str.at (end);
+            str.at (start) = repl;
+            str.at (end--) = '.';
+        }
+    return swapChars (str, ++start, end);
 }
 
 } // aoc

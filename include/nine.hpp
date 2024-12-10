@@ -23,9 +23,10 @@ class Nine final : public Day<int>
     disk_map_t diskMap{};
 
     static void parse (const disk_map_t &dm, string *src);
-    static void sortMap (const string &str);
+    static void sortMap (string &str);
     static int getChecksum (const string &sorted);
 
   private:
+    static void swapChars (string &str, size_t start, size_t end);
 };
 } // aoc
