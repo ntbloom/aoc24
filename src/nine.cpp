@@ -15,32 +15,23 @@ Nine::answerTwo ()
     return -2;
 }
 
-Nine::Nine () : Day<int> (9)
-{
-    unordered_set<char> letters{};
-    string line;
-    getline (this->filestream, line);
-    assert (!line.empty ());
-    for (auto ch : line)
-        {
-            letters.insert (ch);
-            this->diskMap.emplace_back (static_cast<int> (ch - 48));
-        }
-    for (auto ch : letters)
-        {
-            cout << ch << "\n";
-        }
-}
+Nine::Nine () : Day<int> (9) {}
 
 Nine::~Nine () = default;
 
 int
 Nine::one ()
 {
-    auto parsed = make_shared<string> ();
-    parse (this->diskMap, parsed.get ());
-    sortMap (parsed.get ());
-    return getChecksum (*parsed);
+    string line;
+    getline (this->filestream, line);
+    parse (line);
+    printLine ();
+
+    sort ();
+
+    int answer = getChecksum ();
+    assert (answer > 800232992);
+    return answer;
 }
 
 int
@@ -48,73 +39,101 @@ Nine::two ()
 {
     return -2;
 }
+
 void
-Nine::parse (const Nine::disk_map_t &dm, string *src)
+Nine::parse (const string &input)
 {
-    assert (src->empty ());
     int idx = 0;
-    for (auto i = 0; i < dm.size (); i++)
+    int i = 0;
+    for (auto ch : input)
         {
-            auto num = dm.at (i);
-            bool even = i == 0 || (i % 2 == 0);
+            auto num = static_cast<int> (ch - 48);
+            auto even = i % 2 == 0;
             for (auto j = 0; j < num; j++)
                 {
                     if (even)
                         {
-                            src->append (format ("{}", idx));
+                            this->diskMap.emplace_back (
+                                make_shared<Block> (format ("{}", idx), idx));
                         }
                     else
                         {
-                            src->append (".");
+                            this->diskMap.emplace_back (make_shared<Block> (".", 0));
                         }
                 }
-            if (even)
+            if (even && num != 0)
                 {
                     idx++;
                 }
+            i++;
         }
-    return;
 }
 
 void
-Nine::sortMap (string *str)
+Nine::sort ()
 {
-    swapChars (str, 0, str->size () - 1);
+    size_t start = 0;
+    size_t end = this->diskMap.size () - 1;
+
+    while (start <= end)
+        {
+            if (this->diskMap.at (start)->ch == ".")
+                {
+                    this->diskMap.at (start)->ch = this->diskMap.at (end)->ch;
+                    this->diskMap.at (start)->fileId = this->diskMap.at (end)->fileId;
+                    this->diskMap.at (end)->ch = '.';
+                    this->diskMap.at (end)->fileId = 0;
+                    end--;
+                    while (this->diskMap.at (end)->ch == ".")
+                        {
+                            end--;
+                        }
+                }
+            start++;
+        }
+    bool allNumbers = true;
+    for (auto &block : this->diskMap)
+        {
+            if (block->ch == ".")
+                {
+                    allNumbers = false;
+                }
+            if (!allNumbers)
+                {
+                    if (block->ch != ".")
+                        {
+                            throw std::runtime_error ("shouldn't have any dots left");
+                        }
+                }
+        }
 }
 
 int
-Nine::getChecksum (const string &sorted)
+Nine::getChecksum ()
 {
     int total = 0;
+    int prevTotal = 0;
     int idx = 0;
-    for (auto ch : sorted)
+    for (const auto &block : this->diskMap)
         {
-            if (ch != '.')
+            if (prevTotal > total)
                 {
-                    auto num = static_cast<int> (ch - 48);
-                    total += num * idx++;
+                    throw std::runtime_error ("Overflow");
                 }
+            total += idx++ * block->fileId;
+            prevTotal = total;
         }
     return total;
 }
 
-void
-Nine::swapChars (string *str, size_t start, size_t end)
+[[maybe_unused]] void
+Nine::printLine ()
 {
-    if (start >= end)
+    for (const auto &block : this->diskMap)
         {
-            return;
+            cout << block->fileId << " ";
         }
-    if (str->at (start) == '.')
-        {
-            str->at (start) = str->at (end);
-            str->at (end--) = '.';
-            while (str->at (end) == '.')
-                {
-                    end--;
-                }
-        }
-    return swapChars (str, ++start, end);
+    cout << "\n";
 }
-
-} // aoc
+}
+// aoc

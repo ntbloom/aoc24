@@ -19,14 +19,18 @@ class Nine final : public Day<int>
 
     int answerTwo () final;
 
-    using disk_map_t = vector<int>;
+    struct Block
+    {
+        string ch;
+        int fileId;
+    };
+
+    using disk_map_t = vector<shared_ptr<Block>>;
     disk_map_t diskMap{};
 
-    static void parse (const disk_map_t &dm, string *src);
-    static void sortMap (string *str);
-    static int getChecksum (const string &sorted);
-
-  private:
-    static void swapChars (string *str, size_t start, size_t end);
+    void parse (const string &input);
+    void sort ();
+    int getChecksum ();
+    void printLine ();
 };
 } // aoc

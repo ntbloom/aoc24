@@ -32,32 +32,11 @@
 
 using namespace aoc;
 
-class NineTest : public testing::Test
-{
-};
-
-TEST_F (NineTest, ParseBasic)
-{
-    auto testString = make_shared<string> ();
-    ASSERT_TRUE (testString->empty ());
-    Nine::parse (Nine::disk_map_t{ 1, 2, 3, 4, 5 }, testString.get ());
-    ASSERT_FALSE (testString->empty ());
-    ASSERT_STREQ (testString->c_str (), "0..111....22222");
-    Nine::sortMap (testString.get ());
-    ASSERT_STREQ (testString->c_str (), "022111222......");
-}
-
-TEST_F (NineTest, FullPathway)
+TEST (NineTest, FullPathway)
 {
     string input ("2333133121414131402");
-    Nine::disk_map_t numbers{};
-    for (auto ch : input)
-        {
-            numbers.emplace_back (static_cast<int> (ch - 48));
-        }
-    auto testString = make_shared<string> ();
-    Nine::parse (numbers, testString.get ());
-    Nine::sortMap (testString.get ());
-    ASSERT_STREQ (testString->c_str (), "0099811188827773336446555566..............");
-    ASSERT_EQ (Nine::getChecksum (*testString), 1928);
+    auto nine = make_shared<Nine> ();
+    nine->parse (input);
+    nine->sort ();
+    ASSERT_EQ (nine->getChecksum (), 1928);
 }
