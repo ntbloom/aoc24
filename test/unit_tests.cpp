@@ -2,15 +2,16 @@
 #include <gtest/gtest.h>
 
 // clang-format off
+#include "day.hpp"
 //#include "one.hpp"
 //#include "two.hpp"
 //#include "three.hpp"
 //#include "four.hpp"
 //#include "five.hpp"
 //#include "six.hpp"
-#include "seven.hpp"
+//#include "seven.hpp"
 //#include "eight.hpp"
-//#include "nine.hpp"
+#include "nine.hpp"
 //#include "ten.hpp"
 //#include "eleven.hpp"
 //#include "twelve.hpp"
@@ -31,10 +32,20 @@
 
 using namespace aoc;
 
-class TestSeven : public testing::Test
+TEST (NineTest, FullPathway)
 {
-  protected:
-    shared_ptr<Seven> seven = make_shared<Seven> ();
-};
+    string input ("2333133121414131402");
+    auto nine = make_shared<Nine> ();
+    nine->parse (input);
+    nine->sort ();
+    ASSERT_EQ (nine->getChecksum (), 1928);
+}
 
-TEST_F (TestSeven, Calculate) {}
+TEST (NineTest, SampleWithTwoDigitIndex)
+{
+    string input ("233313312141413140259022");
+    auto nine = make_shared<Nine> ();
+    nine->parse (input);
+    nine->sort ();
+    nine->getChecksum ();
+}

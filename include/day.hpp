@@ -51,7 +51,9 @@ namespace termcolor
 {
 static constexpr const char *RED = "\033[0;31m";
 static constexpr const char *RESET = "\033[0m";
-};
+
+constexpr auto clear = [] { cout << "\033c\n"; };
+}
 
 namespace aoc
 {
