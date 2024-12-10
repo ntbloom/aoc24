@@ -79,8 +79,17 @@ Nine::sortMap (string *str)
 int
 Nine::getChecksum (const string &sorted)
 {
-    (void)sorted;
-    return 0;
+    int total = 0;
+    int idx = 0;
+    for (auto ch : sorted)
+        {
+            if (ch != '.')
+                {
+                    auto num = static_cast<int> (ch - 48);
+                    total += num * idx++;
+                }
+        }
+    return total;
 }
 
 void
@@ -91,7 +100,6 @@ Nine::swapChars (string *str, size_t start, size_t end)
             return;
         }
     auto ch = str->at (start);
-    cout << format ("ch={},start={},end={},str={}\n", ch, start, end, str->c_str ());
     if (ch == '.')
         {
             auto repl = str->at (end);
@@ -99,7 +107,6 @@ Nine::swapChars (string *str, size_t start, size_t end)
             str->at (end--) = '.';
             while (str->at (end) == '.')
                 {
-                    cout << "decrementing end\n";
                     end--;
                 }
         }

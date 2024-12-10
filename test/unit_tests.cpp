@@ -55,9 +55,9 @@ TEST_F (EightTest, FullPathway)
         {
             numbers.emplace_back (static_cast<int> (ch - 48));
         }
-
     auto testString = make_shared<string> ();
     Nine::parse (numbers, testString.get ());
     Nine::sortMap (testString.get ());
     ASSERT_STREQ (testString->c_str (), "0099811188827773336446555566..............");
+    ASSERT_EQ (Nine::getChecksum (*testString), 1928);
 }
