@@ -17,12 +17,18 @@ Nine::answerTwo ()
 
 Nine::Nine () : Day<int> (9)
 {
+    unordered_set<char> letters{};
     string line;
     getline (this->filestream, line);
     assert (!line.empty ());
     for (auto ch : line)
         {
+            letters.insert (ch);
             this->diskMap.emplace_back (static_cast<int> (ch - 48));
+        }
+    for (auto ch : letters)
+        {
+            cout << ch << "\n";
         }
 }
 
@@ -99,11 +105,9 @@ Nine::swapChars (string *str, size_t start, size_t end)
         {
             return;
         }
-    auto ch = str->at (start);
-    if (ch == '.')
+    if (str->at (start) == '.')
         {
-            auto repl = str->at (end);
-            str->at (start) = repl;
+            str->at (start) = str->at (end);
             str->at (end--) = '.';
             while (str->at (end) == '.')
                 {

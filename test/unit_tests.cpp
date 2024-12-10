@@ -32,11 +32,11 @@
 
 using namespace aoc;
 
-class EightTest : public testing::Test
+class NineTest : public testing::Test
 {
 };
 
-TEST_F (EightTest, ParseBasic)
+TEST_F (NineTest, ParseBasic)
 {
     auto testString = make_shared<string> ();
     ASSERT_TRUE (testString->empty ());
@@ -47,7 +47,7 @@ TEST_F (EightTest, ParseBasic)
     ASSERT_STREQ (testString->c_str (), "022111222......");
 }
 
-TEST_F (EightTest, FullPathway)
+TEST_F (NineTest, FullPathway)
 {
     string input ("2333133121414131402");
     Nine::disk_map_t numbers{};
