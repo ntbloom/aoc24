@@ -25,11 +25,11 @@ Nine::one ()
     string line;
     getline (this->filestream, line);
     parse (line);
-    printLine ();
 
     sort ();
 
     int answer = getChecksum ();
+    assert (answer != 800232992);
     assert (answer > 800232992);
     return answer;
 }
@@ -44,9 +44,9 @@ void
 Nine::parse (const string &input)
 {
     int idx = 0;
-    int i = 0;
-    for (auto ch : input)
+    for (auto i = 0; i < input.size (); i++)
         {
+            auto ch = input.at (i);
             auto num = static_cast<int> (ch - 48);
             auto even = i % 2 == 0;
             for (auto j = 0; j < num; j++)
@@ -61,11 +61,11 @@ Nine::parse (const string &input)
                             this->diskMap.emplace_back (make_shared<Block> (".", 0));
                         }
                 }
-            if (even && num != 0)
+
+            if (even)
                 {
                     idx++;
                 }
-            i++;
         }
 }
 
@@ -120,7 +120,12 @@ Nine::getChecksum ()
                 {
                     throw std::runtime_error ("Overflow");
                 }
-            total += idx++ * block->fileId;
+            auto num = block->fileId;
+            if (num == 0 && block->ch == ".")
+                {
+                    break;
+                }
+            total += idx++ * num;
             prevTotal = total;
         }
     return total;
