@@ -38,6 +38,7 @@ using std::regex_search;
 using std::set;
 using std::shared_ptr;
 using std::smatch;
+using std::stack;
 using std::string;
 using std::stringstream;
 using std::unique_ptr;
@@ -50,6 +51,7 @@ using std::this_thread::sleep_for;
 namespace termcolor
 {
 static constexpr const char *RED = "\033[0;31m";
+static constexpr const char *GREEN = "\033[0;32m";
 static constexpr const char *RESET = "\033[0m";
 
 constexpr auto clear = [] { cout << "\033c\n"; };

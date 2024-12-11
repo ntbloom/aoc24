@@ -10,7 +10,7 @@
 #include "seven.hpp"
 #include "eight.hpp"
 #include "nine.hpp"
-//#include "ten.hpp"
+#include "ten.hpp"
 //#include "eleven.hpp"
 //#include "twelve.hpp"
 //#include "thirteen.hpp"
@@ -55,8 +55,7 @@ TYPED_TEST_P (TestDay, PartTwo) { this->testTwo (); }
 
 REGISTER_TYPED_TEST_SUITE_P (TestDay, PartOne, PartTwo);
 
-using dayTypes = ::testing::Types<One, One, Two, Three, Four, Five, Six, Seven, Eight, Nine
-                                  //    ,Ten
+using dayTypes = ::testing::Types<One, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
                                   //    ,Eleven
                                   //    ,Twelve
                                   //    ,Thirteen
