@@ -21,10 +21,11 @@ class Nine final : public Day<int>
 
     struct Block
     {
-        string ch;
         int fileId;
+        bool empty;
     };
 
+    size_t lineSize = 0;
     using disk_map_t = vector<shared_ptr<Block>>;
     disk_map_t diskMap{};
 

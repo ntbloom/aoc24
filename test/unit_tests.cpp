@@ -40,3 +40,12 @@ TEST (NineTest, FullPathway)
     nine->sort ();
     ASSERT_EQ (nine->getChecksum (), 1928);
 }
+
+TEST (NineTest, SampleWithTwoDigitIndex)
+{
+    string input ("233313312141413140259022");
+    auto nine = make_shared<Nine> ();
+    nine->parse (input);
+    nine->sort ();
+    nine->getChecksum ();
+}
