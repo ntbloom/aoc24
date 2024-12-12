@@ -13,7 +13,7 @@
 //#include "eight.hpp"
 #include "nine.hpp"
 //#include "ten.hpp"
-//#include "eleven.hpp"
+#include "eleven.hpp"
 //#include "twelve.hpp"
 //#include "thirteen.hpp"
 //#include "fourteen.hpp"
@@ -48,4 +48,12 @@ TEST (NineTest, SampleWithTwoDigitIndex)
     nine->parse (input);
     nine->sort ();
     nine->getChecksum ();
+}
+
+TEST (Eleven, SampleCount)
+{
+    auto eleven = make_unique<Eleven> ();
+    string input ("125 17");
+    ASSERT_EQ (eleven->countStones (input, 6), 22);
+    ASSERT_EQ (eleven->countStones (input, 25), 55312);
 }

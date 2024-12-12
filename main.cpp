@@ -15,7 +15,7 @@
 #include "eight.hpp"
 #include "nine.hpp"
 #include "ten.hpp"
-//#include "eleven.hpp"
+#include "eleven.hpp"
 //#include "twelve.hpp"
 //#include "thirteen.hpp"
 //#include "fourteen.hpp"
@@ -115,8 +115,8 @@ main (int argc, char **argv)
             return getSolution<aoc::Nine> (puzzle);
         case 10:
             return getSolution<aoc::Ten> (puzzle);
-            //        case 11:
-            //            return getSolution<aoc::Eleven> (puzzle);
+        case 11:
+            return getSolution<aoc::Eleven> (puzzle);
             //        case 12:
             //            return getSolution<aoc::Twelve> (puzzle);
             //        case 13:
