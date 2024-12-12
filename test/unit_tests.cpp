@@ -13,7 +13,7 @@
 //#include "eight.hpp"
 #include "nine.hpp"
 //#include "ten.hpp"
-//#include "eleven.hpp"
+#include "eleven.hpp"
 //#include "twelve.hpp"
 //#include "thirteen.hpp"
 //#include "fourteen.hpp"
@@ -49,3 +49,27 @@ TEST (NineTest, SampleWithTwoDigitIndex)
     nine->sort ();
     nine->getChecksum ();
 }
+
+class TestEleven : public testing::TestWithParam<std::pair<int, int>>
+{
+  protected:
+    unique_ptr<Eleven> eleven = make_unique<Eleven> ();
+    int blinks = GetParam ().first;
+    int expected = GetParam ().second;
+};
+
+TEST_P (TestEleven, Blinks)
+{
+    string input ("125 17");
+    ASSERT_EQ (eleven->countStones (input, blinks), expected);
+}
+TEST_P (TestEleven, Part1)
+{
+    auto expected = eleven->answerOne ();
+    auto actual = eleven->countStones (25);
+    ASSERT_EQ (actual, expected);
+}
+
+INSTANTIATE_TEST_SUITE_P (TestElevenWithParam, TestEleven,
+                          testing::Values (std::pair<int, int> (6, 22),
+                                           std::pair<int, int> (25, 55312)));
