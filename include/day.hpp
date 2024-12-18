@@ -56,6 +56,8 @@ static constexpr const char *RESET = "\033[0m";
 
 constexpr auto clear = [] { cout << "\033c\n"; };
 }
+constexpr auto SLEEP
+    = [] (int ms) { std::this_thread::sleep_for (std::chrono::milliseconds (ms)); };
 
 namespace aoc
 {

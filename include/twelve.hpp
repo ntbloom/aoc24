@@ -20,20 +20,29 @@ class Twelve final : public Day<int>
     int answerTwo () final;
 
   private:
+    using region_t = int;
     struct Plant
     {
         int row;
         int col;
         char type;
+        bool visited = false;
+        region_t region = -1;
+
+        Plant *up = nullptr;
+        Plant *down = nullptr;
+        Plant *left = nullptr;
+        Plant *right = nullptr;
     };
 
-    struct Region
-    {
-    };
-
+    int regionCounter = 0;
     using mapRow_t = vector<shared_ptr<Plant>>;
-    vector<mapRow_t> map;
+    vector<mapRow_t> map{};
+    vector<Plant *> regionStarts{};
 
-    void printMap ();
+    void findRegion (Plant *plant);
+    bool isInternal (Plant *plant);
+
+    [[maybe_unused]] void printMap ();
 };
 } // aoc
