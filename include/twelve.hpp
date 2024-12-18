@@ -20,5 +20,20 @@ class Twelve final : public Day<int>
     int answerTwo () final;
 
   private:
+    struct Plant
+    {
+        int row;
+        int col;
+        char type;
+    };
+
+    struct Region
+    {
+    };
+
+    using mapRow_t = vector<shared_ptr<Plant>>;
+    vector<mapRow_t> map;
+
+    void printMap ();
 };
 } // aoc
