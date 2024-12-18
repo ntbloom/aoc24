@@ -5,31 +5,30 @@
 namespace aoc
 {
 
-using eleven_t = size_t;
-
-class Eleven final : public Day<eleven_t>
+class Eleven final : public Day<uint64_t>
 {
   public:
     Eleven ();
 
     ~Eleven () final;
 
-    eleven_t one () final;
+    uint64_t one () final;
 
-    eleven_t two () final;
+    uint64_t two () final;
 
-    eleven_t answerOne () final;
+    uint64_t answerOne () final;
 
-    eleven_t answerTwo () final;
+    uint64_t answerTwo () final;
 
-    int countStones (const string &input, size_t blinks);
+    uint64_t countStones (const string &input, size_t blinks);
+
+    uint64_t countStones (size_t blinks);
 
   private:
-    void parse (const string &input);
-    using stones_t = vector<eleven_t>;
-    using stone_changes_t = vector<unique_ptr<stones_t>>;
-    stone_changes_t changes{};
+    using memo_t = unordered_map<string, uint64_t>;
+    unique_ptr<memo_t> memo = make_unique<memo_t> ();
 
-    void print (const stones_t &stones);
+    void parse (const string &input, vector<uint64_t> &numbers);
+    uint64_t getCount (uint64_t stone, size_t round, size_t blinks) const;
 };
 } // aoc

@@ -12,7 +12,7 @@
 #include "nine.hpp"
 #include "ten.hpp"
 #include "eleven.hpp"
-//#include "twelve.hpp"
+#include "twelve.hpp"
 //#include "thirteen.hpp"
 //#include "fourteen.hpp"
 //#include "fifteen.hpp"
@@ -55,21 +55,20 @@ TYPED_TEST_P (TestDay, PartTwo) { this->testTwo (); }
 
 REGISTER_TYPED_TEST_SUITE_P (TestDay, PartOne, PartTwo);
 
-using dayTypes
-    = ::testing::Types<One, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven
-                       //    ,Twelve
-                       //    ,Thirteen
-                       //    ,Fourteen
-                       //    ,Fifteen
-                       //    ,Sixteen
-                       //    ,Seventeen
-                       //    ,Eighteen
-                       //    ,Nineteen
-                       //    ,Twenty
-                       //    ,TwentyOne
-                       //    ,TwentyTwo
-                       //    ,TwentyThree
-                       //    ,TwentyFour
-                       //    ,TwentyFive
-                       >;
+using dayTypes = ::testing::Types<One, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
+                                  Eleven, Twelve
+                                  //    ,Thirteen
+                                  //    ,Fourteen
+                                  //    ,Fifteen
+                                  //    ,Sixteen
+                                  //    ,Seventeen
+                                  //    ,Eighteen
+                                  //    ,Nineteen
+                                  //    ,Twenty
+                                  //    ,TwentyOne
+                                  //    ,TwentyTwo
+                                  //    ,TwentyThree
+                                  //    ,TwentyFour
+                                  //    ,TwentyFive
+                                  >;
 INSTANTIATE_TYPED_TEST_SUITE_P (ParametrizedDayTests, TestDay, dayTypes);
