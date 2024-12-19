@@ -74,6 +74,7 @@ Twelve::Twelve () : Day<int> (12)
                         }
                 }
         }
+    //    printAllRegions ();
     printMap ();
 }
 
@@ -116,14 +117,8 @@ Twelve::findRegion (aoc::Twelve::Plant *plant)
         {
             if (!neighbor->visited && neighbor->type == plant->type)
                 {
-                    if (isInternal (neighbor))
-                        {
-                            neighbor->region = 0;
-                        }
-                    else
-                        {
-                            neighbor->region = plant->region;
-                        }
+                    neighbor->internal == isInternal (plant);
+                    neighbor->region = plant->region;
                     findRegion (neighbor);
                 }
         }
@@ -146,6 +141,28 @@ void
 Twelve::printMap ()
 {
     termcolor::clear ();
+    for (const auto &line : map)
+        {
+            for (const auto &plant : line)
+                {
+                    auto ch = plant->type;
+                    if (!plant->internal)
+                        {
+                            cout << termcolor::RED << plant->type << termcolor::RESET;
+                        }
+                    else
+                        {
+                            cout << plant->type;
+                        }
+                }
+            cout << "\n";
+        }
+}
+
+void
+Twelve::printAllRegions ()
+{
+    termcolor::clear ();
     for (auto i = 1; i < regionCounter; i++)
         {
             for (const auto &line : map)
@@ -153,11 +170,9 @@ Twelve::printMap ()
                     for (const auto &plant : line)
                         {
                             auto ch = plant->type;
-                            if (plant->region == i)
+                            if (plant->internal)
                                 {
-                                    //                                    cout << termcolor::RED <<
-                                    //                                    plant->type <<
-                                    //                                    termcolor::RESET;
+                                    cout << termcolor::RED << plant->type << termcolor::RESET;
                                 }
                             else
                                 {

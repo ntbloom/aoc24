@@ -28,6 +28,7 @@ class Twelve final : public Day<int>
         char type;
         bool visited = false;
         region_t region = -1;
+        bool internal = true;
 
         Plant *up = nullptr;
         Plant *down = nullptr;
@@ -44,5 +45,6 @@ class Twelve final : public Day<int>
     bool isInternal (Plant *plant);
 
     [[maybe_unused]] void printMap ();
+    [[maybe_unused]] void printAllRegions ();
 };
 } // aoc
